@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: flashbook-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: DATABASE_URL
+        sync: false # set manually in the Render dashboard - your Supabase connection string
+      - key: REDIS_URL
+        sync: false # set manually - your Upstash connection string
+      - key: JWT_SECRET
+        generateValue: true # Render will generate a random secret for you
+      - key: JWT_EXPIRES_IN
+        value: 1h
+      - key: CORS_ORIGIN
+        sync: false # set manually once you know your Vercel frontend URL
+      - key: PG_POOL_MAX
+        value: 20
