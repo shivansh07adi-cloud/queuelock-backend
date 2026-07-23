@@ -191,3 +191,6 @@ UPDATE users SET role = 'admin' WHERE email = 'you@example.com';
 ```
 (We'll build a proper admin-invite flow later if it's ever needed — out of scope for a
 solo learning project.)
+
+
+**Built by [Shivansh Kumar](https://github.com/shivansh07adi-cloud)**
