@@ -1,4 +1,4 @@
-# 🔒 QueueLock
+# 🔒 QueueLock: Backend
 
 **A high-concurrency booking system that never oversells.**
 Thousands of people hit "book" for a handful of slots at the same moment. QueueLock lets them in fairly, one batch at a time, and makes sure every slot is sold exactly once.
@@ -12,6 +12,8 @@ Thousands of people hit "book" for a handful of slots at the same moment. QueueL
 Built by **[Shivansh Kumar](https://shivanshonline.in)** · [GitHub](https://github.com/shivansh07adi-cloud)
 
 > A learning project about the hard parts of flash-sale systems: races, fairness, retries and load.
+>
+> This repo is the **backend API only**. The Next.js UI lives in its own repo: [queuelock-frontend](https://github.com/shivansh07adi-cloud/queuelock-frontend).
 
 ---
 
@@ -171,8 +173,8 @@ BullMQ runs three queues, each with its own worker (`src/queues/workers.js`):
 You need Node.js, a Postgres database (Supabase's free tier works) and a real Redis server.
 
 ```bash
-git clone https://github.com/shivansh07adi-cloud/queuelock.git
-cd queuelock
+git clone https://github.com/shivansh07adi-cloud/queuelock-backend.git
+cd queuelock-backend
 npm install
 cp .env.example .env        # Windows: copy .env.example .env
 ```
@@ -246,7 +248,7 @@ It simulates a flash-sale stampede: **200 virtual users, 500 booking attempts** 
 
 ## Frontend
 
-The UI is a separate Next.js app with its own README. It includes custom animated components: flap counter, splash cursor, flowing menu, curved loop, dome gallery and pixel transition.
+The UI is a separate Next.js app in its own repo, [queuelock-frontend](https://github.com/shivansh07adi-cloud/queuelock-frontend), with its own README and setup. Run this backend first (default `http://localhost:4000`), then point the frontend at it. The UI includes custom animated components: flap counter, splash cursor, flowing menu, curved loop, dome gallery and pixel transition.
 
 ## Project structure
 
@@ -271,7 +273,7 @@ load-tests/                    k6 flash-sale script and setup
 | 2. Concurrency engine | Redis lock, held bookings with TTL, overselling tests |
 | 3. Waiting room | FIFO queue, admission windows, rate limiting, circuit breaker |
 | 4. Payments | Idempotent payment state machine |
-| 5. Jobs and frontend | BullMQ queues, Next.js UI |
+| 5. Jobs and frontend | BullMQ queues here; the Next.js UI is in the frontend repo |
 | 6. Load testing | k6 stampede test, connection pool fix |
 | 7. Deployment | Not built yet |
 
